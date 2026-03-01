@@ -1,0 +1,60 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag (e.g. v1.0.0)'
+        required: true
+        default: 'v1.0.0'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get install -y curl unzip
+
+      - name: Build theme
+        run: bash build.sh
+
+      - name: Determine tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "tag=${{ github.event.inputs.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: ${{ steps.tag.outputs.tag }}
+          body: |
+            ## Midnight-Blue GTK Theme ${{ steps.tag.outputs.tag }}
+
+            A midnight navy/blue GTK theme patched from [catppuccin-mocha-blue v1.0.3](https://github.com/catppuccin/gtk/releases/tag/v1.0.3).
+
+            ### Install (one-liner)
+            ```bash
+            curl -fsSL https://raw.githubusercontent.com/BeanGreen247/catppuccin-midnight-gtk/main/install.sh | bash
+            ```
+
+            ### Manual install
+            ```bash
+            sudo tar -xzf Midnight-Blue.tar.gz -C /usr/share/themes/
+            ```
+          files: dist/Midnight-Blue.tar.gz
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

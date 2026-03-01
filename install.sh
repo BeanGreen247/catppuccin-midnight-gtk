@@ -6,14 +6,14 @@
 # Installs to /usr/share/themes/ if run as root, else ~/.themes/
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/bean/catppuccin-midnight-gtk/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/BeanGreen247/catppuccin-midnight-gtk/main/install.sh | bash
 #   # or
 #   bash install.sh
 # =============================================================================
 set -e
 
 THEME_NAME="Midnight-Blue"
-REPO="bean/catppuccin-midnight-gtk"
+REPO="BeanGreen247/catppuccin-midnight-gtk"
 RELEASE_URL="https://github.com/$REPO/releases/latest/download/$THEME_NAME.tar.gz"
 
 for cmd in curl tar; do

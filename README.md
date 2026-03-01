@@ -31,7 +31,7 @@ the [sway-setup-script](https://github.com/bean/sway-setup-script) waybar/rofi/s
 ### One-liner (recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/bean/catppuccin-midnight-gtk/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/BeanGreen247/catppuccin-midnight-gtk/main/install.sh | bash
 ```
 
 Installs to `/usr/share/themes/` if run as root, else `~/.themes/`.
@@ -40,14 +40,14 @@ Installs to `/usr/share/themes/` if run as root, else `~/.themes/`.
 
 ```bash
 # Download latest release
-curl -fsSL https://github.com/bean/catppuccin-midnight-gtk/releases/latest/download/Midnight-Blue.tar.gz \
+curl -fsSL https://github.com/BeanGreen247/catppuccin-midnight-gtk/releases/latest/download/Midnight-Blue.tar.gz \
   | sudo tar -xzf - -C /usr/share/themes/
 ```
 
 ### Build from source
 
 ```bash
-git clone https://github.com/bean/catppuccin-midnight-gtk
+git clone https://github.com/BeanGreen247/catppuccin-midnight-gtk
 cd catppuccin-midnight-gtk
 sudo bash build.sh --install
 ```
